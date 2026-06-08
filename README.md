@@ -12,7 +12,7 @@ Install the required Python packages, then run the GUI:
 
 ```bash
 pip install numpy pandas matplotlib scipy scikit-learn xgboost
-python Model_0608_2026_GUI_auto_patched_v9.py
+python Model_0608_2026_GUI_auto_patched.py
 ```
 
 Optional packages can be installed if additional model functions are needed:
