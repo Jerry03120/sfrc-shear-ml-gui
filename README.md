@@ -11,14 +11,8 @@ The GUI supports model training, result export, prediction using saved models, S
 Install the required Python packages, then run the GUI:
 
 ```bash
-pip install numpy pandas matplotlib scipy scikit-learn xgboost
+pip install numpy pandas matplotlib scipy scikit-learn xgboost shap
 python Model_0608_2026_GUI_auto_patched.py
-```
-
-Optional packages can be installed if additional model functions are needed:
-
-```bash
-pip install lightgbm catboost shap
 ```
 
 When the GUI opens, use the **Run** tab to select the required CSV input files. The default file paths in the source code are from the original research environment, so users on a different machine should select the CSV files manually.
@@ -163,7 +157,7 @@ After each run, the program automatically exports result tables and figures. Typ
 * Prediction-versus-observation plots
 * Model comparison figures
 * Literature-equation comparison results
-* SHAP analysis outputs, if SHAP is installed
+* SHAP analysis outputs
 * Saved prediction models for later use in the Predict tab
 
 ---
