@@ -1,127 +1,73 @@
 # SFRC Shear TL GUI
 
-## SFRC Transfer Learning Model
-
-This repository contains a Python GUI program for shear strength prediction of reinforced concrete (RC) and steel fiber reinforced concrete (SFRC) beams using machine learning and heterogeneous transfer learning.
-
-The program is designed for research on RC-to-SFRC transfer learning and compares the final selected machine learning models used in the study.
+A machine learning GUI for predicting the shear strength of RC and SFRC beams using heterogeneous transfer learning (HTL). The program compares HTL models — which leverage RC source data — against target-only baselines trained exclusively on SFRC data.
 
 ---
 
-## Main File
+## Getting started
 
-```bash
-Model_0607_2026_GUI.py
-```
-
----
-
-## Algorithms Used
-
-The program evaluates only the final algorithms used in the model comparison:
-
-* HTL-XGB
-* HTL-ET
-* HTL-RF
-* XGB Target-Only
-* ET Target-Only
-* RF Target-Only
-
-Where:
-
-* HTL = Heterogeneous Transfer Learning
-* XGB = Extreme Gradient Boosting
-* ET = Extra Trees
-* RF = Random Forest
-* Target-Only = Model trained using only the target SFRC dataset
-
----
-
-## Key Features
-
-* Graphical user interface for model execution
-* RC-to-SFRC heterogeneous transfer learning
-* Target-only baseline model comparison
-* Automatic result table export
-
-
----
-
-## Performance Metrics
-
-The program calculates model performance using:
-
-* R²
-* RMSE
-* MAE
-* Mean A/P ratio
-* Coefficient of variation of A/P
-* Pearson correlation coefficient
-
----
-
-## Required Python Packages
-
-Install the required packages before running the program.
+Install dependencies, then run:
 
 ```bash
 pip install numpy pandas matplotlib scipy scikit-learn xgboost
-```
-
----
-
-## How to Run
-
-Run the GUI program using Python:
-
-```bash
 python Model_0607_2026_GUI.py
 ```
 
-After launching the GUI, select the required CSV input files through the interface.
+Once the GUI opens, select the three CSV input files through the interface. Default file paths in the source code are from the original research environment, so on a different machine you'll need to select them manually.
 
 ---
 
-## Input Data
+## Models
 
-The program uses CSV files for:
+Six algorithms are evaluated across two training strategies:
 
-* RC source dataset
-* SFRC Group 1 target dataset
-* SFRC Group 2 target dataset
+**HTL (Heterogeneous Transfer Learning)** — leverages RC source data for SFRC prediction
+- HTL-XGB (Extreme Gradient Boosting)
+- HTL-ET (Extra Trees)
+- HTL-RF (Random Forest)
 
-Typical input variables include:
-
-* Beam width, `b`
-* Effective depth, `d`
-* Shear span-to-depth ratio, `a/d`
-* Concrete compressive strength, `f'c`
-* Longitudinal reinforcement ratio, `rho`
-* Fiber volume fraction, `Vf`
-* Reinforcing index, `RI`
-* Fiber aspect ratio, `Lf/Df`
-* Residual strength parameters, when available
-* Experimental shear strength, `Vu`
+**Target-Only** — trained on SFRC data alone, used as baselines
+- XGB Target-Only
+- ET Target-Only
+- RF Target-Only
 
 ---
 
-## Notes
+## Input data
 
-The source code may include default local paths from the original research environment.
-When running the program on another computer, select the input CSV files manually through the GUI.
+Three CSV files are required:
 
-Do not upload private datasets, unpublished experimental data, or confidential research files to a public repository unless they are intended to be shared.
+| File | Description |
+|------|-------------|
+| RC source dataset | Conventional RC beam experiments (source domain) |
+| SFRC Group 1 | SFRC beam experiments — target domain, subset 1 |
+| SFRC Group 2 | SFRC beam experiments — target domain, subset 2 |
+
+**Input variables:** `b` (beam width), `d` (effective depth), `a/d` (shear span ratio), `f'c` (compressive strength), `ρ` (reinforcement ratio), `Vf` (fiber volume fraction), `RI` (reinforcing index), `Lf/Df` (fiber aspect ratio), residual strength parameters (where available), `Vu` (experimental shear strength)
 
 ---
 
-## Repository Structure
+## Performance metrics
 
-```text
+R², RMSE, MAE, mean A/P ratio, CV of A/P, Pearson correlation coefficient
+
+---
+
+## Repository structure
+
+```
 sfrc-shear-ml-gui/
-│
 ├── README.md
 └── Model_0607_2026_GUI.py
 ```
+
+---
+
+## A note on data
+
+Results are exported automatically as a table after each run.
+
+Please do not upload unpublished experimental data, private datasets, or confidential research files to a public repository unless you intend for them to be publicly accessible.
 
 ---
 
@@ -129,8 +75,6 @@ sfrc-shear-ml-gui/
 
 Jerry03120
 
----
-
 ## License
 
-This repository is provided for academic and research use.
+For academic and research use only.
