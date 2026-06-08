@@ -67,8 +67,6 @@ sfrc-shear-ml-gui/
 
 Results are exported automatically as a table after each run.
 
-Please do not upload unpublished experimental data, private datasets, or confidential research files to a public repository unless you intend for them to be publicly accessible.
-
 ---
 
 ## Author
