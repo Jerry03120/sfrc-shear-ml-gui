@@ -173,7 +173,7 @@ After each run, the program automatically exports result tables and figures. Typ
 ```text
 sfrc-shear-ml-gui/
 ├── README.md
-└── Model_0608_2026_GUI_auto_patched_v9.py
+└── Model_0608_2026_GUI_auto_patched.py
 ```
 
 ---
