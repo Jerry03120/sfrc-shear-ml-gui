@@ -1,6 +1,6 @@
 """
 ================================================================================
-Model_expanded.py
+Model_GUI_HTL_XGB_patched.py
 RC → SFRC Heterogeneous Transfer Learning — Extended models
 
 ================================================================================
