@@ -42,10 +42,8 @@ Where:
 * Graphical user interface for model execution
 * RC-to-SFRC heterogeneous transfer learning
 * Target-only baseline model comparison
-* Automatic model-performance evaluation
 * Automatic result table export
-* Automatic figure generation for model comparison
-* Literature equation comparison for shear strength prediction
+
 
 ---
 
