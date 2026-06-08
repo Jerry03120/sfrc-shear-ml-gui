@@ -2,9 +2,9 @@
 
 ## SFRC Transfer Learning Model
 
-This repository provides a Python-based graphical user interface (GUI) program for predicting the shear strength of reinforced concrete (RC) and steel fiber reinforced concrete (SFRC) deep beams using machine learning and heterogeneous transfer learning.
+This repository contains a Python GUI program for shear strength prediction of reinforced concrete (RC) and steel fiber reinforced concrete (SFRC) deep beams using machine learning and heterogeneous transfer learning.
 
-The main purpose of this program is to support RC-to-SFRC transfer learning analysis, model comparison, and result visualization for research applications.
+The program is designed for research on RC-to-SFRC transfer learning and compares the final selected machine learning models used in the study.
 
 ---
 
@@ -16,28 +16,9 @@ Model_0607_2026_GUI.py
 
 ---
 
-## Key Features
-
-* Python GUI for RC/SFRC shear prediction analysis
-* Heterogeneous transfer learning from RC source data to SFRC target data
-* Target-only machine learning baseline models
-* Literature-based shear strength equation comparison
-* Automatic metric calculation:
-
-  * R²
-  * RMSE
-  * MAE
-  * A/P ratio
-  * CoV of A/P
-  * Pearson correlation coefficient
-* Automatic export of result tables and figures
-* Support for manuscript-style comparison figures
-
----
-
 ## Algorithms Used
 
-The GUI is configured to evaluate the main algorithms used in the study, including:
+The program evaluates only the final algorithms used in the model comparison:
 
 * HTL-XGB
 * HTL-ET
@@ -46,7 +27,38 @@ The GUI is configured to evaluate the main algorithms used in the study, includi
 * ET Target-Only
 * RF Target-Only
 
-Additional RC source model search functions may be included internally for transfer learning source-model selection.
+Where:
+
+* HTL = Heterogeneous Transfer Learning
+* XGB = Extreme Gradient Boosting
+* ET = Extra Trees
+* RF = Random Forest
+* Target-Only = Model trained using only the target SFRC dataset
+
+---
+
+## Key Features
+
+* Graphical user interface for model execution
+* RC-to-SFRC heterogeneous transfer learning
+* Target-only baseline model comparison
+* Automatic model-performance evaluation
+* Automatic result table export
+* Automatic figure generation for model comparison
+* Literature equation comparison for shear strength prediction
+
+---
+
+## Performance Metrics
+
+The program calculates model performance using:
+
+* R²
+* RMSE
+* MAE
+* Mean A/P ratio
+* Coefficient of variation of A/P
+* Pearson correlation coefficient
 
 ---
 
@@ -55,32 +67,30 @@ Additional RC source model search functions may be included internally for trans
 Install the required packages before running the program.
 
 ```bash
-pip install numpy pandas matplotlib scipy scikit-learn xgboost lightgbm catboost shap statsmodels
+pip install numpy pandas matplotlib scipy scikit-learn xgboost
 ```
-
-Some packages such as `xgboost`, `lightgbm`, `catboost`, `shap`, and `statsmodels` may be optional depending on the selected analysis options.
 
 ---
 
 ## How to Run
 
-Run the GUI program with Python:
+Run the GUI program using Python:
 
 ```bash
 python Model_0607_2026_GUI.py
 ```
 
-After launching the GUI, select the required input CSV files through the interface.
+After launching the GUI, select the required CSV input files through the interface.
 
 ---
 
 ## Input Data
 
-The program is designed to use CSV datasets for:
+The program uses CSV files for:
 
-* RC beam database
-* SFRC Group 1 database
-* SFRC Group 2 database
+* RC source dataset
+* SFRC Group 1 target dataset
+* SFRC Group 2 target dataset
 
 Typical input variables include:
 
@@ -92,18 +102,17 @@ Typical input variables include:
 * Fiber volume fraction, `Vf`
 * Reinforcing index, `RI`
 * Fiber aspect ratio, `Lf/Df`
-* Residual tensile strength parameters, when available
-
-The target variable is typically the experimental shear strength, such as `Vu` or shear stress `tau_u`.
+* Residual strength parameters, when available
+* Experimental shear strength, `Vu`
 
 ---
 
 ## Notes
 
-This code may contain default local file paths for the original research environment.
-If the program is used on another computer, input CSV files should be selected manually through the GUI.
+The source code may include default local paths from the original research environment.
+When running the program on another computer, select the input CSV files manually through the GUI.
 
-Please make sure that private datasets, unpublished experimental data, or confidential research files are not uploaded to a public repository unless they are intended to be shared.
+Do not upload private datasets, unpublished experimental data, or confidential research files to a public repository unless they are intended to be shared.
 
 ---
 
@@ -118,12 +127,6 @@ sfrc-shear-ml-gui/
 
 ---
 
-## Research Purpose
-
-This repository was prepared for research on machine learning-based shear strength prediction of RC and SFRC deep beams, with a focus on heterogeneous transfer learning from RC data to limited SFRC data.
-
----
-
 ## Author
 
 Jerry03120
@@ -132,5 +135,4 @@ Jerry03120
 
 ## License
 
-This repository is currently provided for research and academic use.
-Please contact the author before using the code for commercial purposes.
+This repository is provided for academic and research use.
