@@ -1,4 +1,4 @@
-# SFRC Shear ML GUI
+# SFRC Shear TL GUI
 
 ## SFRC Transfer Learning Model
 
