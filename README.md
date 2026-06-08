@@ -62,7 +62,7 @@ Three CSV files are required:
 | ----------------- | --------------------------------------------------------------------------- |
 | RC source dataset | Conventional RC beam test data used as the source domain                    |
 | SFRC Group 1      | SFRC beam test data with basic fiber-index variables                        |
-| SFRC Group 2      | SFRC beam test data with additional tensile and residual strength variables |
+| SFRC Group 2      | SFRC beam test data with additional tensile variables |
 
 ---
 
@@ -129,7 +129,7 @@ For prediction input:
 * `a/d` must be greater than or equal to 2.0.
 * Group 1 uses RC common variables and fiber-index variables.
 * Group 2 additionally uses `f_sp`, `f_t,dir`, and `f_r` as input features.
-* Group 2 tensile and residual strength values must be entered as numeric values for prediction.
+* Group 2 tensile values must be entered as numeric values for prediction.
 
 ---
 
@@ -176,7 +176,7 @@ sfrc-shear-ml-gui/
 
 * The GUI was designed for RC-to-SFRC heterogeneous transfer learning research.
 * Default paths in the Python file may need to be changed depending on the user’s local directory structure.
-* For Group 2 prediction, tensile and residual strength parameters should be provided as numerical input values.
+* For Group 2 prediction, tensile parameters should be provided as numerical input values.
 * The GUI layout is optimized for readable screenshots suitable for academic papers.
 
 ---
