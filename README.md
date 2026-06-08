@@ -2,7 +2,7 @@
 
 ## SFRC Transfer Learning Model
 
-This repository contains a Python GUI program for shear strength prediction of reinforced concrete (RC) and steel fiber reinforced concrete (SFRC) deep beams using machine learning and heterogeneous transfer learning.
+This repository contains a Python GUI program for shear strength prediction of reinforced concrete (RC) and steel fiber reinforced concrete (SFRC) beams using machine learning and heterogeneous transfer learning.
 
 The program is designed for research on RC-to-SFRC transfer learning and compares the final selected machine learning models used in the study.
 
