@@ -1,33 +1,37 @@
 # SFRC Shear TL GUI
 
-A graphical user interface (GUI) for predicting the shear strength of RC and SFRC beams using heterogeneous transfer learning (HTL). The program uses RC beam data as the source domain and SFRC beam data as the target domain to compare HTL models with target-only baseline models.
+> A GUI for predicting the shear strength of RC and SFRC beams using Heterogeneous Transfer Learning (HTL)
 
-The GUI supports model training, result export, prediction using saved models, SHAP analysis, and an input guide for RC, SFRC Group 1, and SFRC Group 2 datasets.
+RC beam data is used as the source domain and SFRC beam data as the target domain to compare HTL models against target-only baseline models. Supported features include model training, result export, prediction with saved models, SHAP analysis, and an input guide for RC and SFRC datasets.
 
 ---
 
-## Getting started
+## Quick Start
 
-Install the required Python packages, then run the GUI:
+### 1. Install dependencies
 
 ```bash
 pip install numpy pandas matplotlib scipy scikit-learn xgboost shap
-python Model_GUI_HTL_XGB.py
 ```
 
-When the GUI opens, use the **Run** tab to select the required CSV input files. The default file paths in the source code are from the original research environment, so users on a different machine should select the CSV files manually.
+### 2. Run the GUI
+
+```bash
+python Model_GUI_HTL_XGB_patched.py
+```
+
+> **Note** — Default file paths in the source code are set to the original research environment.  
+> When running on a different machine, select the CSV files manually in the **Run** tab.
 
 ---
 
-## GUI tabs
+## GUI Tabs
 
-The program includes three main tabs:
-
-| Tab         | Description                                                                         |
-| ----------- | ----------------------------------------------------------------------------------- |
-| Run         | Load input CSV files, run transfer learning analysis, and export results            |
-| Input Guide | Shows the required input columns for RC source data, SFRC Group 1, and SFRC Group 2 |
-| Predict     | Load saved models and predict shear strength using user-entered parameters          |
+| Tab | Description |
+|---|---|
+| **Run** | Load CSV files → run transfer learning analysis → export results |
+| **Input Guide** | View required input columns for RC source data and SFRC Group 1 & 2 |
+| **Predict** | Load saved models → predict shear strength from user-entered parameters |
 
 ---
 
@@ -35,156 +39,137 @@ The program includes three main tabs:
 
 Six machine learning models are evaluated using two training strategies.
 
-### HTL models
+### HTL Models — trained on source + target domain data
 
-HTL models use RC source-domain data together with SFRC target-domain data.
+| Model | Description |
+|---|---|
+| **HTL-XGB** | Heterogeneous Transfer Learning + XGBoost |
+| **HTL-ET** | Heterogeneous Transfer Learning + Extra Trees |
+| **HTL-RF** | Heterogeneous Transfer Learning + Random Forest |
 
-* HTL-XGB: Heterogeneous Transfer Learning with XGBoost
-* HTL-ET: Heterogeneous Transfer Learning with Extra Trees
-* HTL-RF: Heterogeneous Transfer Learning with Random Forest
+### Target-Only Models — baseline, trained on SFRC data only
 
-### Target-only models
-
-Target-only models are trained only on SFRC target-domain data and are used as baseline models.
-
-* XGB Target-Only
-* ET Target-Only
-* RF Target-Only
+| Model | Description |
+|---|---|
+| **XGB Target-Only** | XGBoost trained on SFRC data only |
+| **ET Target-Only** | Extra Trees trained on SFRC data only |
+| **RF Target-Only** | Random Forest trained on SFRC data only |
 
 ---
 
-## Input data
+## Input Data
 
 Three CSV files are required:
 
-| File              | Description                                              |
-| ----------------- | -------------------------------------------------------- |
+| File | Description |
+|---|---|
 | RC source dataset | Conventional RC beam test data used as the source domain |
-| SFRC Group 1      | SFRC beam test data with basic fiber-index variables     |
-| SFRC Group 2      | SFRC beam test data with additional tensile variables    |
+| SFRC Group 1 | SFRC beam test data with basic fiber-index variables |
+| SFRC Group 2 | SFRC beam test data with additional tensile variables |
 
 ---
 
-## Input variables
+## Input Variables
 
-### RC source domain
+### RC Source Domain
 
-| Variable    | Description                                                                                |
-| ----------- | ------------------------------------------------------------------------------------------ |
-| `b_mm`      | Beam width, mm                                                                             |
-| `d_mm`      | Effective depth, mm                                                                        |
-| `a_d`       | Shear span-to-depth ratio                                                                  |
-| `fc_MPa`    | Concrete compressive strength, MPa                                                         |
-| `rho`       | Longitudinal reinforcement ratio, %                                                        |
-| `V_u_KN`    | Experimental shear strength, kN                                                            |
-| `tau_u_MPa` | Shear stress, MPa. If not provided, it can be calculated from `V_u_KN`, `b_mm`, and `d_mm` |
+| Variable | Description | Unit |
+|---|---|---|
+| `b_mm` | Beam width | mm |
+| `d_mm` | Effective depth | mm |
+| `a_d` | Shear span-to-depth ratio | — |
+| `fc_MPa` | Concrete compressive strength | MPa |
+| `rho` | Longitudinal reinforcement ratio | % |
+| `V_u_KN` | Experimental shear strength | kN |
+| `tau_u_MPa` | Shear stress — auto-calculated from `V_u_KN`, `b_mm`, `d_mm` if not provided | MPa |
 
 ### SFRC Group 1
 
-| Variable    | Description                                                                                |
-| ----------- | ------------------------------------------------------------------------------------------ |
-| `b_mm`      | Beam width, mm                                                                             |
-| `d_mm`      | Effective depth, mm                                                                        |
-| `a_d`       | Shear span-to-depth ratio                                                                  |
-| `fc_MPa`    | Concrete compressive strength, MPa                                                         |
-| `rho`       | Longitudinal reinforcement ratio, %                                                        |
-| `V_f_pct`   | Fiber volume fraction, %                                                                   |
-| `RI`        | Reinforcing index                                                                          |
-| `Lf_per_Df` | Fiber aspect ratio                                                                         |
-| `V_u_KN`    | Experimental shear strength, kN                                                            |
-| `tau_u_MPa` | Shear stress, MPa. If not provided, it can be calculated from `V_u_KN`, `b_mm`, and `d_mm` |
+Includes all RC source domain variables, plus the following fiber-related variables:
+
+| Variable | Description | Unit |
+|---|---|---|
+| `V_f_pct` | Fiber volume fraction | % |
+| `RI` | Reinforcing index | — |
+| `Lf_per_Df` | Fiber aspect ratio | — |
 
 ### SFRC Group 2
 
-| Variable        | Description                                                                                |
-| --------------- | ------------------------------------------------------------------------------------------ |
-| `b_mm`          | Beam width, mm                                                                             |
-| `d_mm`          | Effective depth, mm                                                                        |
-| `a_d`           | Shear span-to-depth ratio                                                                  |
-| `fc_MPa`        | Concrete compressive strength, MPa                                                         |
-| `rho`           | Longitudinal reinforcement ratio, %                                                        |
-| `V_f_pct`       | Fiber volume fraction, %                                                                   |
-| `RI`            | Reinforcing index                                                                          |
-| `Lf_per_Df`     | Fiber aspect ratio                                                                         |
-| `fsp_MPa`       | Splitting tensile strength, MPa                                                            |
-| `ft_direct_MPa` | Direct tensile strength, MPa                                                               |
-| `fr_MPa`        | Modulus of rupture, MPa                                                                    |
-| `V_u_KN`        | Experimental shear strength, kN                                                            |
-| `tau_u_MPa`     | Shear stress, MPa. If not provided, it can be calculated from `V_u_KN`, `b_mm`, and `d_mm` |
+Includes all Group 1 variables, plus the following tensile variables:
+
+| Variable | Description | Unit |
+|---|---|---|
+| `fsp_MPa` | Splitting tensile strength | MPa |
+| `ft_direct_MPa` | Direct tensile strength | MPa |
+| `fr_MPa` | Modulus of rupture | MPa |
 
 ---
 
-## Prediction mode
+## Prediction Mode (Predict Tab)
 
-The **Predict** tab allows the user to load saved models and predict:
+Load a saved model after training to predict shear strength from user-entered values.
 
-* `V_u` in kN
-* `τ_u` in MPa
+**Outputs**
+- `V_u` (kN)
+- `τ_u` (MPa)
 
-Saved models are loaded from the model output folder generated after training.
+**Input requirements**
 
-For prediction input:
-
-* `a/d` must be greater than or equal to 2.0.
-* Group 1 uses RC common variables and fiber-index variables.
-* Group 2 additionally uses `f_sp`, `f_t,dir`, and `f_r` as input features.
-* Group 2 tensile values must be entered as numeric values for prediction.
+- `a/d` must be ≥ **2.0**
+- **Group 1** — enter RC common variables + fiber-index variables
+- **Group 2** — enter Group 1 variables + numeric values for `f_sp`, `f_t,dir`, and `f_r`
 
 ---
 
-## Performance metrics
+## Performance Metrics
 
-The program evaluates model performance using the following metrics:
-
-| Metric     | Description                                               |
-| ---------- | --------------------------------------------------------- |
-| R²         | Coefficient of determination                              |
-| RMSE       | Root mean squared error                                   |
-| MAE        | Mean absolute error                                       |
-| A/P mean   | Mean actual-to-predicted ratio                            |
-| A/P CoV    | Coefficient of variation of the actual-to-predicted ratio |
-| Pearson r  | Pearson correlation coefficient                           |
-| Spearman r | Spearman rank correlation coefficient                     |
+| Metric | Description |
+|---|---|
+| **R²** | Coefficient of determination |
+| **RMSE** | Root mean squared error |
+| **MAE** | Mean absolute error |
+| **A/P mean** | Mean of actual-to-predicted ratio |
+| **A/P CoV** | Coefficient of variation of actual-to-predicted ratio |
+| **Pearson r** | Pearson correlation coefficient |
+| **Spearman r** | Spearman rank correlation coefficient |
 
 ---
 
-## Exported results
+## Exported Outputs
 
-After each run, the program automatically exports result tables and figures. Typical outputs include:
+The following files are generated automatically after each run:
 
-* Cross-validation metric summaries
-* Prediction-versus-observation plots
-* Model comparison figures
-* Literature-equation comparison results
-* SHAP analysis outputs
-* Saved prediction models for later use in the Predict tab
+- Cross-validation metric summary tables
+- Predicted vs. observed scatter plots
+- Model comparison figures
+- Literature equation comparison results
+- SHAP analysis outputs
+- Saved model files for use in the Predict tab
 
 ---
 
-## Repository structure
+## Repository Structure
 
-```text
+```
 sfrc-shear-ml-gui/
 ├── README.md
-└── Model_GUI_HTL_XGB.py
+└── Model_GUI_HTL_XGB_patched.py
 ```
 
 ---
 
 ## Notes
 
-* The GUI was designed for RC-to-SFRC heterogeneous transfer learning research.
-* Default paths in the Python file may need to be changed depending on the user’s local directory structure.
-* For Group 2 prediction, tensile parameters should be provided as numerical input values.
-* The GUI layout is optimized for readable screenshots suitable for academic papers.
+- This GUI was designed for RC-to-SFRC heterogeneous transfer learning research.
+- Default paths in the Python file may need to be updated to match your local directory structure.
+- For Group 2 prediction, tensile parameters must be entered as numeric values.
+- The GUI layout is optimized for readable screenshots suitable for academic papers.
 
 ---
 
 ## Author
 
 Jerry03120
-
----
 
 ## License
 
