@@ -1,33 +1,8 @@
 """
 ================================================================================
 Model_expanded.py
-RC → SFRC Heterogeneous Transfer Learning — Extended models + optimized loss
+RC → SFRC Heterogeneous Transfer Learning — Extended models
 
-Changes:
-  ① New models added (based on 20+ literature reviews):
-      LightGBM (MAE loss)  — SFRC deep beam R²=97.8% [Maabreh & Almasabha, 2024]
-      CatBoost (MAE loss)  — RC deep beam test R²=0.947 [Megahed, 2024 Sci.Rep]
-      GPR (Matern 5/2)     — uncertainty quantification for small datasets [Nguyen 2023, Wakjira 2021]
-      SVR (epsilon-insensitive) — outlier-robust, stable on small datasets [Rahman 2022]
-      XGB_MAE (MAE loss)   — more uniform A/P ratio compared to MSE
-      AdaBoost excluded → GPR, SVR outperform (literature consensus)
-
-  ② Loss function optimization:
-      GBT  : squared_error → Huber loss (alpha=0.9) — balanced MSE/MAE
-      XGB  : parallel MSE and MAE variants
-      LGBM : MAE (objective='mae')
-      CatBoost: MAE (loss_function='MAE')
-      GPR  : Matern 5/2 + WhiteKernel
-      SVR  : epsilon=0.1 (Huber-like)
-
-  ③ Training loop refactored: unified _to() / _htl() helpers,
-      per-model exception handling: skip failed model, continue experiment
-
-Install:
-  pip install xgboost lightgbm catboost   (optional — missing packages are skipped)
-
-Run:
-  python Model_expanded.py
 ================================================================================
 """
 
