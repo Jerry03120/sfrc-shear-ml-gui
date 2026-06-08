@@ -12,7 +12,7 @@ Install the required Python packages, then run the GUI:
 
 ```bash
 pip install numpy pandas matplotlib scipy scikit-learn xgboost shap
-python Model_0608_2026_GUI_auto_patched.py
+python Model_GUI_HTL_XGB.py
 ```
 
 When the GUI opens, use the **Run** tab to select the required CSV input files. The default file paths in the source code are from the original research environment, so users on a different machine should select the CSV files manually.
@@ -21,14 +21,13 @@ When the GUI opens, use the **Run** tab to select the required CSV input files. 
 
 ## GUI tabs
 
-The program includes four main tabs:
+The program includes three main tabs:
 
 | Tab         | Description                                                                         |
 | ----------- | ----------------------------------------------------------------------------------- |
 | Run         | Load input CSV files, run transfer learning analysis, and export results            |
 | Input Guide | Shows the required input columns for RC source data, SFRC Group 1, and SFRC Group 2 |
 | Predict     | Load saved models and predict shear strength using user-entered parameters          |
-| Preview     | Preview exported results, figures, and saved outputs                                |
 
 ---
 
@@ -58,11 +57,11 @@ Target-only models are trained only on SFRC target-domain data and are used as b
 
 Three CSV files are required:
 
-| File              | Description                                                                 |
-| ----------------- | --------------------------------------------------------------------------- |
-| RC source dataset | Conventional RC beam test data used as the source domain                    |
-| SFRC Group 1      | SFRC beam test data with basic fiber-index variables                        |
-| SFRC Group 2      | SFRC beam test data with additional tensile variables |
+| File              | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| RC source dataset | Conventional RC beam test data used as the source domain |
+| SFRC Group 1      | SFRC beam test data with basic fiber-index variables     |
+| SFRC Group 2      | SFRC beam test data with additional tensile variables    |
 
 ---
 
@@ -167,7 +166,7 @@ After each run, the program automatically exports result tables and figures. Typ
 ```text
 sfrc-shear-ml-gui/
 ├── README.md
-└── Model_0608_2026_GUI_auto_patched.py
+└── Model_GUI_HTL_XGB.py
 ```
 
 ---
